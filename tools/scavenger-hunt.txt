@@ -1,0 +1,22 @@
+1. Using "ip addr" on Kali:
+IPv4:  10.0.2.15
+IPv6:  fe80::a00:27ff:fe61:6a17
+(on Windows, can use "ipconfig" instead)
+
+2. Use "host [machine].[domain]", i.e. "host mirage.mathcs.carleton.edu"
+
+3. Similar to above, use "host [address]", i.e. "137.22.5.8"
+
+4. "scp [file to copy] [full address to copy to]" should work,
+   though when I ran "scp Desktop/TestFile dehaans@mantis.mathcs.carleton.edu:/cs231/SecondTestFile", things seemed to break...
+
+5 and 6. "nmap [host address]" gets a full list of open ports,
+         or "nmap [host address] | grep [port number]" filters the results to just one port
+
+7. "wget [web address]" works for Wikipedia and Google, though not for Carleton
+
+8. "curl --verbose [web address]" does the trick, though Carleton's site is still not cooperating
+   to make it cleaner, "curl -D - [web address]" usually works, but sometimes it prints out the whole thing
+   "curl -D - -o /dev/null [web address]" seems to work all the time, or "curl -s -D - -o /dev/null [web address]"
+
+9. "curl -s -v --stderr - [web address] | grep -a '^>'" works: the -a tag was neccessary for me because it was turning things into binary
