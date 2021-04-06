@@ -1,0 +1,53 @@
+Soren, Ethan
+
+=====DAYTIME=====
+  1.
+1	0.000000000	10.0.2.15	129.6.15.28	TCP	74	42218 → 13 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=3883840386 TSecr=0 WS=128
+2	0.051856025	129.6.15.28	10.0.2.15	TCP	60	13 → 42218 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1460
+3	0.051895574	10.0.2.15	129.6.15.28	TCP	54	42218 → 13 [ACK] Seq=1 Ack=1 Win=64240 Len=0
+
+  2.
+The port number is 42218. Having a specific port is necessary so that the client knows where to listen in order to get the server response.
+
+  3.
+4	0.088566933	129.6.15.28	10.0.2.15	DAYTIME	105	DAYTIME Response
+
+  4.
+59310 21-04-06 02:34:40 50 0 0 814.7 UTC(NIST) * 
+mjd^  date^    time^    d^ l^h^mls^  zone/src^
+(modified julian date)
+                        (daylight savings time 50:yes, 0:no)
+                           (leap second soon 1:yes, 0:no)
+                             (health of time server, 0:healthy)
+                               (millisecond "send ahead time")
+
+  5.
+SYNchronize sequence numbers: this helps order the packets, by incrementing the sequence numbers one at a time.
+
+  6.
+ACKnowledge: confirms that the client or server has received the message.
+
+  7.
+FINished: confirms that this is the last message from the sender at this time. Used for closing TCP.
+
+  8.
+The server initiated, because the first FIN flag is from the server IP address and port number.
+
+=====HTTP=====
+
+  1.
+Three TCP connections were opened, which we can tell because there are 3 packets flagged with [SYN], followed by 3 packets flagged with [SYN,ACK].
+
+  2.
+Here's the corresponding frame summary (note the GET):
+7	0.047156396	10.0.2.15	45.79.89.123	HTTP	403	GET /index.html HTTP/1.1
+If by "where" you mean url or port or ip address, that's all here, but I'm assuming specific frame is what you're looking for.
+
+  3.
+As above:
+11	0.121212316	10.0.2.15	45.79.89.123	HTTP	372	GET /jeff_square_head.jpg HTTP/1.1 
+
+=====QUESTIONS=====
+
+It seems like sequence doesn't always increment by one... what's up with that?
+There's a window variable that seems to have sixteen bits. What does it mean?
